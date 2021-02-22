@@ -1,0 +1,6 @@
+app2/*
+app/build/*
+.DS_Store
+app/.gradle
+app/logs
+*.jar

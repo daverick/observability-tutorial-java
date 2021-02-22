@@ -1,0 +1,14 @@
+name: javalin-app-shipper
+
+filebeat.inputs:
+- type: log
+  enable: true
+  paths:
+    - /tmp/javalin/*.log
+  json.keys_under_root: true
+
+output.elasticsearch:
+  api_key: "B5kQpncBrPrRO-RJ78je:H2HqLYzfQp-yHWx4Tx_8Bg"
+
+processors:
+  - add_host_metadata: ~

@@ -1,0 +1,32 @@
+name: heartbeat-shipper
+
+cloud.id: ${CLOUD_ID}
+output.elasticsearch:
+  api_key: "Q-9Pq3cBw7KQApMUAZGa:hI_NozhGR1Wy-wAW_qn_5Q"
+
+heartbeat.monitors:
+  - type: http
+    id: javalin-http-app
+    name: "Javalin Web Application"
+    urls: ["http://host.docker.internal:7000"]
+    check.response.status: [200]
+    schedule: '@every 15s'
+
+  - type: http
+    id: httpbin-get
+    name: "httpbin GET"
+    urls: ["https://httpbin.org/get"]
+    check.response.status: [200]
+    schedule: '@every 15s'
+
+  - type: tcp
+    id: javalin-tcp
+    name: "TCP Port 7000"
+    hosts: ["host.docker.internal:7000"]
+    schedule: '@every 15s'
+
+processors:
+  - add_observer_metadata:
+      geo:
+        name: europe-barcelona
+        location: "41.3879, 2.16992"
